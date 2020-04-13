@@ -65,11 +65,6 @@ MyGame.objects.Player = function(spec, graphics){
                 deadTime +=1;
                 if(deadTime >= 3){
                     lives -=1;
-                    console.log("lives: " + lives)
-                    if(lives< 0){
-                        //GAME OVER
-                        // should we put this in gameModel?
-                    }
                     resetPlayer();
                 }
             }
@@ -106,11 +101,6 @@ MyGame.objects.Player = function(spec, graphics){
             );
             particleExplosion.render();
         }
-        //shows frog hit circle
-        // graphics.drawCircle(
-        //     center,
-        //     radius,
-        // )
     }
 
    

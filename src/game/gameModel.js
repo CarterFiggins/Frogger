@@ -33,6 +33,7 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
 
     // registering controls
     controls = JSON.parse(localStorage.getItem("controls"));
+    console.log(controls)
     myKeyboard.register(controls.up, froggerUp);
     myKeyboard.register(controls.down, froggerDown);
     myKeyboard.register(controls.left, froggerLeft);
@@ -51,7 +52,9 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
     graphics
     )
     
-
+    let pointLine = player.center.y - board.boxSize.y +10;
+    let resetpointLine = player.center.y - board.boxSize.y +10;
+    
     function processInput(elapsedTime){
         myKeyboard.update(elapsedTime);
     }
@@ -81,6 +84,7 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
                 checkTimesUp();
             }
             checkWin();
+            pointLineCheck();
         }
         else{
             winTime += elapsedTime
@@ -115,6 +119,17 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
         if(timer < 0){
             player.death();
             timer = startingTime;
+            pointLine = resetpointLine
+
+        }
+    }
+
+    function pointLineCheck(){
+        if(pointLine >player.center.y){
+            console.log(pointLine)
+            pointLine -= board.boxSize.y;
+            score += 10
+            
         }
     }
 
@@ -124,6 +139,8 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
             if(detecting.objectCollision(player.radius, player.center, car.rectangle)){
                 player.death()
                 timer = startingTime;
+                pointLine = resetpointLine
+
             }
         }
     }
@@ -149,6 +166,8 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
             if(detecting.objectInsideRect(player.center,bush.rectangle)){
                 player.death();
                 timer = startingTime;
+                pointLine = resetpointLine
+
             }
         }
         for(lily of board.lilies){
@@ -165,6 +184,7 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
                     homeTime = 0;
                     stopTimer = false;
                     timer = startingTime
+                    pointLine = resetpointLine;
                 }
             }
         }
@@ -194,11 +214,15 @@ MyGame.model.Game = function (input, objects, graphics, setUp){
         if(!detecting.objectInsideRect(player.center, gameRect)){
             player.death();
             timer = startingTime;
+            pointLine = resetpointLine
+
         }
         if(detecting.objectInsideRect(player.center, board.waterRectangle)){
             if(!onlog && !player.jumping){
                 player.death();
                 timer = startingTime;
+                pointLine = resetpointLine
+
             }
         }
     }

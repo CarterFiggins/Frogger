@@ -15,7 +15,6 @@ document.getElementById('right').innerHTML += "<span class = 'red'> '" + control
 document.getElementById('left').innerHTML += "<span class = 'red'> '" + controls.left + "'</span>";
 document.getElementById('down').innerHTML += "<span class = 'red'> '" + controls.down + "'</span>";
 
-console.log("HELLO")
 
 function upClick(){
     document.getElementById('newControls').innerHTML = "Enter a key for Up";

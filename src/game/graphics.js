@@ -81,6 +81,7 @@ MyGame.graphics = (function() {
     function drawCircle(center, radius){
         context.beginPath();
         context.arc(center.x,center.y, radius, 0, 2*Math.PI);
+
     }
 
 

@@ -28,6 +28,16 @@ MyGame.model.Collision = function(){
         return false;
     }
 
+    function objectLineCollision(playerRadius, playerCenter, line){
+        let circle = {center:playerCenter, radius: playerRadius}
+        if(lineCircleIntersection(line.pt1, line.pt2,circle)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     function objectInsideRect(playerCenter,rectangle){
         let startx = rectangle.center.x - rectangle.size.x/2;
         let starty = rectangle.center.y - rectangle.size.y/2;
@@ -70,6 +80,7 @@ MyGame.model.Collision = function(){
     let api = {
         objectCollision: objectCollision,
         objectInsideRect: objectInsideRect,
+        objectLineCollision: objectLineCollision,
     }
 
     return api;
