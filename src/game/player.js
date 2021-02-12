@@ -63,7 +63,7 @@ MyGame.objects.Player = function(spec, graphics){
             updateTime -= 1000;
             if(!alive){
                 deadTime +=1;
-                if(deadTime >= 3){
+                if(deadTime >= 2){
                     lives -=1;
                     resetPlayer();
                 }
@@ -157,7 +157,7 @@ MyGame.objects.Player = function(spec, graphics){
 
     function death(){
         alive = false;
-        particleExplosion.fire(center);
+        particleExplosion.fire(center,20);
         console.log("YOU DEAD")
     }
 

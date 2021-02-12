@@ -150,11 +150,27 @@ MyGame.model.SetUp = function(){
                 )
                 objects.push(object)
             }
+            if(i<=2){
+                object = MyGame.objects.Car({
+                    imageSrc: '../images/turtle-sprite.png',
+                    center: {x: 800 + i*55, y: boxSize.y*6 + boxSize.y/2},
+                    size:{width: boxSize.x, height:boxSize.y},
+                    speed: turBotSpeed,
+                    rotation: Math.PI,
+                    width: width,
+                    death: false,
+                    sprite: true,
+                    turtleUnder: true,
+                },
+                graphics
+                )
+                objects.push(object)
+            }
             let turTopSpeed = -.14
             if(i<=1){
                 object = MyGame.objects.Car({
                     imageSrc: '../images/turtle-sprite.png',
-                    center: {x: 100 + i*55, y: boxSize.y*3 + boxSize.y/2},
+                    center: {x: 0 + i*55, y: boxSize.y*3 + boxSize.y/2},
                     size:{width: boxSize.x, height:boxSize.y},
                     speed: turTopSpeed,
                     rotation: Math.PI,
@@ -170,7 +186,7 @@ MyGame.model.SetUp = function(){
             if(i<=1){
                 object = MyGame.objects.Car({
                     imageSrc: '../images/turtle-sprite.png',
-                    center: {x: 400 + i*55, y: boxSize.y*3 + boxSize.y/2},
+                    center: {x: 300 + i*55, y: boxSize.y*3 + boxSize.y/2},
                     size:{width: boxSize.x, height:boxSize.y},
                     speed: turTopSpeed,
                     rotation: Math.PI,
@@ -186,7 +202,7 @@ MyGame.model.SetUp = function(){
             if(i<=1){
                 object = MyGame.objects.Car({
                     imageSrc: '../images/turtle-sprite.png',
-                    center: {x: 700 + i*55, y: boxSize.y*3 + boxSize.y/2},
+                    center: {x: 600 + i*55, y: boxSize.y*3 + boxSize.y/2},
                     size:{width: boxSize.x, height:boxSize.y},
                     speed: turTopSpeed,
                     rotation: Math.PI,
@@ -199,6 +215,21 @@ MyGame.model.SetUp = function(){
                 )
                 objects.push(object)
             }
+            if(i == 0){
+                object = MyGame.objects.Car({
+                    imageSrc: '../images/alligatorSprite.png',
+                    center:{x: 900, y: boxSize.y*3 + boxSize.y/2},
+                    size:{width: boxSize.x*3, height:boxSize.y},
+                    speed: turTopSpeed,
+                    rotation: 0,
+                    width: width,
+                    death: true,
+                    sprite: true,
+                    alligator: true,
+                })
+                objects.push(object)
+            }
+
 
         }
         return objects;

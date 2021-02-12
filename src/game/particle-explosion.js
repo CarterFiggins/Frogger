@@ -7,9 +7,9 @@ function ParticleExplosion(graphics, spec) {
     image.src = spec.imageSrc;
 
     // fires once. can reset by calling reset.
-    that.fire = function(center){
+    that.fire = function(center, number){
         if(once){
-            for (let particle = 0; particle < 20; particle++) {
+            for (let particle = 0; particle < number; particle++) {
                 let dir = Random.nextCircleVector()
                 let size = Math.abs(Random.nextGaussian(spec.size.mean, spec.size.stdev));
                 let p = create({

@@ -11,6 +11,7 @@ MyGame.model.Board = function (graphics, setUp){
     let lilies = [];
     let firstLoop = false;
     let frogAtHome= [];
+    let randNum = Math.floor(Math.random()*10);
 
     let centerTime ={
         x:790,
@@ -133,19 +134,23 @@ MyGame.model.Board = function (graphics, setUp){
 
         for(let i=0; i<numberOfBoxes; i++){
             if(i == 1 || i == 4 || i == 7 || i == 10 || i == 13){
-                graphics.drawTexture(bushLily, center, 0, sizeHome);   
+                graphics.drawTexture(bushLily, center, 0, sizeHome);  
+                 
                 if(!firstLoop){
                     lilies.push({
                         size: sizeHome,
                         center: {...center},
                         num: i,
                         reached: false,
+                        fly: false,
+                        alligator: false,
                         rectangle: {
                             center: {...center},
                             size:{x: sizeHome.width, y: sizeHome.height}
                         }
                     })
                 }
+
             }
             else{
                 graphics.drawTexture(bush, center, 0, sizeBush);
@@ -164,6 +169,8 @@ MyGame.model.Board = function (graphics, setUp){
         }
         firstLoop = true;
         center.x = boxSize.x/2
+
+        
     }
 
     function renderLifes(lives){
@@ -201,24 +208,54 @@ MyGame.model.Board = function (graphics, setUp){
         graphics.drawText(`Score: ${score}`, 'Arial', 25, 'white', 50, 25)
     }
 
+    function setUpFly(num, show){
+
+        for(lily of lilies){
+            if(lily.num == num){
+                if(!lily.reached)
+                if(show){
+                    if(randNum < 6){
+                        lily.fly = true;
+                    }
+                    else{
+                        lily.alligator = true;
+                    }
+                }
+                else{
+                    lily.fly = false;
+                    lily.alligator = false;
+                    randNum = Math.floor(Math.random()*9)
+                }
+            }
+        }
+    }
+
     function homeReached(num){
         lilypad = {}
         for(lily of lilies){
             if(lily.num === num){
                 lilypad = {...lily}
                 lily.reached = true;
+                frogAtHome.push({
+                    image: littleFrog,
+                    center: {...lilypad.center},
+                    rotation: 0,
+                    size: {
+                        width: lily.size.width/1.5,
+                        height: lily.size.height/1.5,
+                    },
+                    })
+                if(lily.fly){
+                    lily.fly = false
+                    return 200;
+                }
+                else{
+                    return 0;
+                }
+                
             }
         }
 
-        frogAtHome.push({
-            image: littleFrog,
-            center: {...lilypad.center},
-            rotation: 0,
-            size: {
-                width: lily.size.width/1.5,
-                height: lily.size.height/1.5,
-            },
-            })
         
     }
 
@@ -230,6 +267,7 @@ MyGame.model.Board = function (graphics, setUp){
         renderCars: renderCars,
         homeReached: homeReached,
         renderLifes: renderLifes,
+        setUpFly: setUpFly,
         get waterRectangle(){return waterRectangle},
         get boxSize(){return boxSize},
         get center(){return center},
